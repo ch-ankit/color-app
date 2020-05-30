@@ -9,6 +9,7 @@ class Palette extends Component {
                     {/* Bunch of Color Boxes */}
                 </div>
                 {/* footer eventually */}
+                hello
             </div>
         );
     }
