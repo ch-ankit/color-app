@@ -8,7 +8,8 @@
     margin-bottom: -4.5px;
 }
 
-.copy-button {
+.copy-button,
+.back-button {
     width: 100px;
     height: 30px;
     position: absolute;
@@ -25,9 +26,17 @@
     color: white;
     text-transform: uppercase;
     border: none;
+    text-decoration: none;
+}
+.light-text {
+    color: white;
+}
+.ColorBox .dark-text {
+    color: rgba(0, 0, 0, 0.5);
+}
+.copy-button {
     opacity: 0;
 }
-
 .ColorBox:hover .copy-button {
     opacity: 1;
     transition: 0.5s;
@@ -104,6 +113,14 @@
     text-align: center;
     margin-bottom: 0;
     padding: 1rem;
+}
+
+.SingleColorPalette .ColorBox {
+    height: 50%;
+}
+
+.ColorBox.go-back {
+    background-color: black;
 }
 
 .copy-msg p {

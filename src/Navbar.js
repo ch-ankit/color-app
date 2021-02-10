@@ -31,7 +31,7 @@ class Navbar extends Component {
                 <div className="logo">
                     <Link to="/">reactcolorpicker</Link>
                 </div>
-                <div className="slider-container">
+                {this.props.navbar && <div className="slider-container">
                     <span>Level:{this.props.level}</span>
                     <div className="Slider">
                         <Slider
@@ -42,7 +42,7 @@ class Navbar extends Component {
                             onAfterChange={this.handleChange}
                         />
                     </div>
-                </div>
+                </div>}
                 <div className="select-container">
                     <Select
                         value={this.state.format}
