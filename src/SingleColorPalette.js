@@ -3,6 +3,16 @@ import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import PaletteFooter from './PaletteFooter';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
+
+const styles = {
+    palette: {
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+    }
+
+}
 
 class SingleColorPalette extends Component {
     constructor(props) {
@@ -24,11 +34,12 @@ class SingleColorPalette extends Component {
     }
 
     render() {
+        const { classes } = this.props
         const colorBoxes = this._shades.map(color => (
             <ColorBox key={color.name} name={color.name} background={color[this.state.format]} showingFullPallete={false} />
         ))
         return (
-            <div className="SingleColorPalette Palette">
+            <div className={`SingleColorPalette ${classes.palette}`}>
                 <Navbar navbar={false} handleChange={this.changeColorFormat} />
                 <div className='Palette-colors'>
                     {colorBoxes}
@@ -42,4 +53,4 @@ class SingleColorPalette extends Component {
     }
 }
 
-export default SingleColorPalette;
+export default withStyles(styles)(SingleColorPalette);
