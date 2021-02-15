@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import Slider from "rc-slider";
 import Select from "@material-ui/core/Select";
 import "rc-slider/assets/index.css";
-import "./Navbar.css";
 import CloseIcon from "@material-ui/icons/Close";
+import styles from "./styles/NavbarStyles"
 import { MenuItem, Snackbar, IconButton } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { withStyles } from "@material-ui/styles";
+
 
 class Navbar extends Component {
     constructor(props) {
@@ -26,24 +28,26 @@ class Navbar extends Component {
         this.props.changer(newLevel);
     }
     render() {
+        const { classes } = this.props
         return (
-            <header className="Navbar">
-                <div className="logo">
+            <header className={classes.navbar}>
+                <div className={classes.logo}>
                     <Link to="/">reactcolorpicker</Link>
                 </div>
-                {this.props.navbar && <div className="slider-container">
-                    <span>Level:{this.props.level}</span>
-                    <div className="Slider">
-                        <Slider
-                            defaultValue={this.props.level}
-                            step={100}
-                            min={100}
-                            max={900}
-                            onAfterChange={this.handleChange}
-                        />
-                    </div>
-                </div>}
-                <div className="select-container">
+                {this.props.navbar &&
+                    <div>
+                        <span>Level:{this.props.level}</span>
+                        <div className={classes.slider}>
+                            <Slider
+                                defaultValue={this.props.level}
+                                step={100}
+                                min={100}
+                                max={900}
+                                onAfterChange={this.handleChange}
+                            />
+                        </div>
+                    </div>}
+                <div className={classes.selectContainer}>
                     <Select
                         value={this.state.format}
                         onChange={this.handleColorChange}
@@ -84,4 +88,4 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+export default withStyles(styles)(Navbar);
