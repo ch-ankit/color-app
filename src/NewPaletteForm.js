@@ -74,11 +74,15 @@ const styles = (theme) => ({
 });
 
 class NewPaletteForm extends Component {
-    state = {
-        open: false,
-        background: "#fff"
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: true,
+            currentColor: "teal",
+            colors: ['purple', 'red']
+        }
+        this.addNewColor = this.addNewColor.bind(this)
     }
-
     handleDrawerOpen = () => {
         this.setState({ open: true });
     };
@@ -87,12 +91,15 @@ class NewPaletteForm extends Component {
         this.setState({ open: false });
     };
     handleChangeComplete = (color) => {
-        this.setState({ background: color.hex });
+        this.setState({ currentColor: color.hex });
     };
+    addNewColor() {
+        this.setState({ colors: [...this.state.colors, this.currentColor] })
+    }
 
     render() {
         const { classes } = this.props
-        const { open, background } = this.state
+        const { open, currentColor } = this.state
         return (
             <div className={classes.root}>
                 <CssBaseline />
@@ -139,8 +146,8 @@ class NewPaletteForm extends Component {
                         <Button variant="contained" color="secondary" >Clear Palette</Button>
                         <Button variant="contained" color="primary" >Random Color</Button>
                     </div>
-                    <ChromePicker color={background} onChangeComplete={this.handleChangeComplete} />
-                    <Button variant="contained" color={`${background}`}>Add Color</Button>
+                    <ChromePicker color={currentColor} onChangeComplete={this.handleChangeComplete} />
+                    <Button variant="contained" color="primary" style={{ backgroundColor: currentColor }}>Add Color</Button>
                 </Drawer>
                 <main
                     className={clsx(classes.content, {
@@ -148,6 +155,11 @@ class NewPaletteForm extends Component {
                     })}
                 >
                     <div className={classes.drawerHeader} />
+                    <ul>
+                        {this.state.colors.map(color => (
+                            <li>{color}</li>
+                        ))}
+                    </ul>
                 </main>
             </div>
         );
