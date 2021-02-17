@@ -22,13 +22,13 @@ class App extends Component {
     })
   }
   savePalette(newPalette) {
-    this.setState({ paletteList: [...seedColors, newPalette] })
+    this.setState({ paletteList: [...this.state.paletteList, newPalette] })
   }
   render() {
     return (
       <Switch>
         <Route exact path="/" render={(routeProps) => <PaletteList palettes={this.state.paletteList} {...routeProps} />} />
-        <Route exact path="/palette/new" render={(routeProps) => <NewPaletteForm {...routeProps} savePalette={this.savePalette} />} />
+        <Route exact path="/palette/new" render={(routeProps) => <NewPaletteForm {...routeProps} paletteList={this.state.paletteList} savePalette={this.savePalette} />} />
         <Route exact path="/palette/:id" render={(routeProps) => <Palette palette={generatePallete(this.findPallete(routeProps.match.params.id))} />} />
         <Route exact path="/palette/:paletteId/:colorId" render={(routeProps) => <SingleColorPalette colorId={routeProps.match.params.colorId} palette={generatePallete(this.findPallete(routeProps.match.params.paletteId))} />} />
       </Switch>
