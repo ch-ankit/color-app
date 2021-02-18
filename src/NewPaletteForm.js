@@ -89,6 +89,7 @@ class NewPaletteForm extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.randomColorGenerator = this.randomColorGenerator.bind(this)
+        this.deleteColor = this.deleteColor.bind(this)
     }
     componentDidMount() {
         ValidatorForm.addValidationRule('isColorNameUnique', value => this.state.colors.every(({ name }) => value.toLowerCase() !== name.toLowerCase())
@@ -127,6 +128,11 @@ class NewPaletteForm extends Component {
         const newPalette = { paletteName: this.state.newPaletteName, colors: this.state.colors, id: this.state.newPaletteName.replace(/ /g, '-') }
         this.props.savePalette(newPalette)
         this.props.history.push('/')
+    }
+    deleteColor(colorName) {
+        this.setState({
+            colors: this.state.colors.filter(color => color.name !== colorName)
+        })
     }
 
     render() {
@@ -214,7 +220,7 @@ class NewPaletteForm extends Component {
                 >
                     <div className={classes.drawerHeader} />
                     {this.state.colors.map(color => (
-                        <DragableColorBox color={color.color} name={color.name} />
+                        <DragableColorBox key={color.name} color={color.color} name={color.name} handleClick={this.deleteColor} />
                     ))}
                 </main>
             </div>

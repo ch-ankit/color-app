@@ -42,7 +42,7 @@ class DragableColorBox extends Component {
                     <span>
                         {this.props.name}
                     </span>
-                    <DeleteIcon className={classes.deleteIcon} />
+                    <DeleteIcon className={classes.deleteIcon} onClick={() => this.props.handleClick(this.props.name)} />
                 </div>
             </div>
         );
